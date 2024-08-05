@@ -1,8 +1,10 @@
 import psycopg2
 import pandas as pd
+
 data = 'employeeData.csv'
 df = pd.read_csv(data)
 print(df.head())
+
 try:
     # Conectar a la base de datos PostgreSQL
     connection = psycopg2.connect(
@@ -48,8 +50,21 @@ try:
 
     print("Tabla de rendimiento de empleados creada exitosamente.")
 
+    get_employee_performance_query = '''
+        SELECT * FROM EmployeePerformance;
+    '''
+
+    cursor.execute(get_employee_performance_query)
+    employee_performance = cursor.fetchall()
+
+    employees = pd.DataFrame(employee_performance, columns=['id', 'employee_id', 'department', 'performance_score', 'years_with_company', 'salary'])
+    
+    # Calcular estadísticas por departamento
+    df = pd.DataFrame(employees, columns=['id', 'performance_score', 'years_with_company', 'salary'])
+    for department in employees['department'].unique():
+        df['Fi'] = 
 except Exception as e:
-    print(f"Error al conectar a PostgreSQL: {e}")
+    print(f"Error: {e}")
 
 finally:
     if connection:

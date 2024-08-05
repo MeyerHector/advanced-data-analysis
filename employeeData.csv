@@ -1,4 +1,4 @@
-id,employee_id,departament,performance_score,years_with_company,salary
+id,employee_id,department,performance_score,years_with_company,salary
 1,1,Product Management,10.0,17,1410.37
 2,2,Services,8.9,6,2447.16
 3,3,Support,1.0,8,2015.89
